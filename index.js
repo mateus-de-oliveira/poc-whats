@@ -20,7 +20,7 @@ app.get('/api', (request, response) => {
 })
 
 
-app.listen('3333', () => {
+app.listen(process.env.PORT || 3333, () => {
   console.log('SERVIDOR RODANDO')
 })
 
