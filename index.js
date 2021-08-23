@@ -1,4 +1,7 @@
 const wa = require('@open-wa/wa-automate')
+const express = require('express')
+
+const app = express()
 
 const launchConfig = {
   cacheEnabled: false,
@@ -7,12 +10,17 @@ const launchConfig = {
 
 let chatId = '558596849077@c.us'
 
-exports.handler = async (event) => {
+async function start(client) {
+  client.sendText(chatId, '<3')
+}
 
+app.get('/api', (request, response) => {
   wa.create(launchConfig).then((client) => start(client))
+  return response.status(200).json('OK')
+})
 
-  async function start(client) {
-    client.sendText(chatId, '<3')
-}
 
-}
+app.listen('3333', () => {
+  console.log('SERVIDOR RODANDO')
+})
+
